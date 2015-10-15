@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  root "videos#index"
+
+  resources :videos do
+    collection do
+      get :draf
+      get :tags_ajax
+      get :most_viewed
+    end
+    member do
+      post 'published'
+      post 'delete' => 'videos#destroy'
+      post 'like'
+      post 'dislike'
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
